@@ -36,7 +36,30 @@ Given a code snippet, predict whether it is:
 - Train - 500K samples (238K Human-Written | 262K Machine-Generated)
 - Validation - 100K samples
 
-**Target Metric** - Macro F1-score (we will build the leaderboard based on it), but you are free to use whatever works best for your approach during training.
+**Data Format**
+Each dataset contains the following fields:
+- `code`: The code snippet
+- `label`: The binary label (0 for human-written, 1 for machine-generated)
+- `language`: The programming language of the snippet
+
+Label mappings are provided in `task_A/label_to_id.json` and `task_A/id_to_label.json`.
+
+**Evaluation Metric**
+The primary evaluation metric for Subtask A is **Macro F1-score**. This metric ensures balanced performance across both classes.
+
+**Submission Format**
+Participants must submit a `.csv` file with the following columns:
+- `id`: Unique identifier for each code snippet
+- `label`: Predicted label (0 or 1)
+
+A sample submission file is available in the `task_A/` folder.
+
+**Baseline Models**
+Baseline implementations for Subtask A are provided in the `baselines/` directory. These include starter code and pre-trained checkpoints for models such as GraphCodeBERT and UniXcoder.
+
+**Restrictions**
+- **No external training data**: Use only the provided datasets.
+- **No specialized AI-generated code detectors**: General-purpose code models (e.g., CodeBERT, StarCoder) are allowed.
 
 ---
 
