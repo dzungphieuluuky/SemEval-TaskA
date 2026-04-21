@@ -30,6 +30,7 @@ from .data import load_datasets, compute_metrics
 from .model import load_model_and_tokenizer, freeze_base_model
 from .losses import get_label_smoothed_cross_entropy, get_focal_loss, get_infonce_loss
 from .augmentation import CodeAugmentation
+from .callbacks import ConfigLoggingCallback
 from .utils import setup_logger, log_model_architecture
 
 
@@ -363,7 +364,10 @@ def train_pipeline(cfg: TrainConfig) -> Tuple[Trainer, nn.Module, PreTrainedToke
         eval_dataset=val_dataset,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
-        callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
+        callbacks=[
+            EarlyStoppingCallback(early_stopping_patience=3),
+            ConfigLoggingCallback(train_config=cfg),
+        ],
         loss_type=cfg.loss_type,
         r_drop_alpha=cfg.r_drop_alpha,
         compute_loss_fn=compute_loss_fn,

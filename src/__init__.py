@@ -11,6 +11,7 @@ Modules:
     model: Model loading and configuration (Model Layer)
     losses: Custom loss functions
     augmentation: Data augmentation strategies
+    callbacks: Training callbacks (e.g., config logging)
     train: Training engine and trainer class (Training Layer)
     inference: Inference pipeline
 """
